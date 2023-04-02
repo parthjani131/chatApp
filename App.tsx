@@ -12,7 +12,7 @@ import * as Device from "expo-device";
 
 export default function App() {
   const [deviceType, setDeviceType] = useState(Device.DeviceType.PHONE);
-  const [inputText, setInputText] = useState<string | undefined>();
+  const [inputText, setInputText] = useState<string | undefined>("");
   const [msgContent, setMsgContent] = useState<any[]>([]);
   const [updateContent, setUpdateContent] = useState(false);
 
@@ -73,7 +73,7 @@ export default function App() {
                     <Text>{item.msg}</Text>
                   </View>
                   {deviceType !== Device.DeviceType.PHONE && (
-                    <Text>{`${date.getHours()}:${date.getMinutes()}`}</Text>
+                    <Text className="text-grey2">{`${date.getHours()}:${date.getMinutes()}`}</Text>
                   )}
                 </View>
               );
@@ -89,8 +89,10 @@ export default function App() {
           <TouchableOpacity
             activeOpacity={0.6}
             onPress={() => {
-              setInputText("");
-              setContent();
+              if (inputText !== "") {
+                setInputText("");
+                setContent();
+              }
             }}
             className="justify-center align-center mr-2"
           >
